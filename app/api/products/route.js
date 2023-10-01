@@ -17,7 +17,7 @@ export const GET = async () => {
 
 
 
-export const DELETE = async (req) => {
+//export const DELETE = async (req) => {
     // const { id } = QueryRouter()
     // const {id} = req.query
 
@@ -27,13 +27,26 @@ export const DELETE = async (req) => {
     // }
 
     // console.log(id);
+//     try {
+//         await deleteProduct(req.query.id);
+//         return new Response("Product deleted successfully", { status: 200 });
+//     } catch (error) {
+//         return new Response("Failed to delete Product", { status: 500 });
+//     }
+// };
+
+export const DELETE = async (req) => {
     try {
-        await deleteProduct(req.query.id);
-        return new Response("Product deleted successfully", { status: 200 });
+       const { searchParams } = new URL(req.url);
+       const id = searchParams.get('id');
+       await deleteProduct(id);
+
+        return new Response("Product deleted successfully", {status:200})
     } catch (error) {
-        return new Response("Failed to delete Product", { status: 500 });
+        return new Response("Failed to delete Product", {status: 500})
     }
-};
+}
+
 
 export const POST = async (req) => {
     const { image, title, price, category, description } = await req.json()
