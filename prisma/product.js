@@ -1,6 +1,27 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
+
+
+// prisma/prisma.js
+// import { PrismaClient } from '@prisma/client'
+
+// let prisma
+
+// if (process.env.NODE_ENV === 'production') {
+//     prisma = new PrismaClient()
+// } else {
+//     if (!global.prisma) {
+//         global.prisma = new PrismaClient()
+//     }
+//     prisma = global.prisma
+// }
+
+// export default prisma
+
+
+
+
 export const createProduct = async (image, title, price, category, description) => {
    
         const product = await prisma.product.create({
@@ -60,12 +81,10 @@ export const getAllProducts = async () => {
 
 export const deleteProduct = async (id) => {
    
-    const product = await prisma.product.delete({
+    await prisma.product.delete({
         where: {
             id: id
         }
     })
-
-    return product
 };
 

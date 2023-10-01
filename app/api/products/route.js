@@ -19,16 +19,16 @@ export const GET = async () => {
 
 export const DELETE = async (req) => {
     // const { id } = QueryRouter()
-    const { id } = req.query
+    // const {id} = req.query
 
-    if (!id) {
-        console.log("id not there");
-        return new Response("Missing id parameter", { status: 400 });
-    }
+    // if (!id) {
+    //     console.log("id not there");
+    //     return new Response("Missing id parameter", { status: 400 });
+    // }
 
-    console.log(id);
+    // console.log(id);
     try {
-        await deleteProduct(id);
+        await deleteProduct(req.query.id);
         return new Response("Product deleted successfully", { status: 200 });
     } catch (error) {
         return new Response("Failed to delete Product", { status: 500 });
